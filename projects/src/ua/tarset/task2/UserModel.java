@@ -43,7 +43,8 @@ public class UserModel {
 		return countPossibleActions;
 	}
 	public void setCountPossibleActions(int countPossibleActions) {
-		this.countPossibleActions = countPossibleActions;
+		if (countPossibleActions >= 0)
+			this.countPossibleActions = countPossibleActions;
 	}
 	
 	public int getCountPaidDays() {
