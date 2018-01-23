@@ -6,7 +6,7 @@ public class UserModel {
 	private int exp = 0;
 	private boolean paid = false;
 	private int countPossibleActions = 3;
-	private int countPaidDays = 0;
+	private int countPaidDays = 5;
 	
 	public String getName() {
 		return name;
@@ -43,14 +43,14 @@ public class UserModel {
 		return countPossibleActions;
 	}
 	public void setCountPossibleActions(int countPossibleActions) {
-		if (countPossibleActions >= 0)
-			this.countPossibleActions = countPossibleActions;
+		this.countPossibleActions = countPossibleActions;
 	}
 	
 	public int getCountPaidDays() {
 		return countPaidDays;
 	}
 	public void setCountPaidDays(int countPaidDays) {
+		if (countPaidDays >= 0)
 		this.countPaidDays = countPaidDays;
 	} 
 	
