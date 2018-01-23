@@ -38,12 +38,7 @@ public class UserController {
 			for (int i = 0; i < countAction; i++)
 				user.setExp(random.nextInt(100) + 20);
 			
-			//TODO: Тимчасово, потрібно придумати, щоб виводити кількість виконаних дій до емуляції нового дня.
-			System.out.print("Username - " + user.getName());
-			if (user.isPaid())
-				System.out.print("\t[Left " + user.getCountPaidDays() + " days premium]");
-			System.out.println("\nAction taken: " + user.getCountPossibleActions());
-			System.out.println("Level: " + user.getLevel() + "\nExp: " + user.getExp());
+			outputUser(user);
 			
 			user.emulatedNextDay();
 		}
@@ -56,11 +51,16 @@ public class UserController {
 			System.out.println((i + 1) + ". " + users.get(i).getName());
 		System.out.print("Select user: ");
 		int idUser = Integer.parseInt(input()) - 1;
-		System.out.print("Username - " + users.get(idUser).getName());
-		if (users.get(idUser).isPaid())
-			System.out.println("\t[Left " + users.get(idUser).getCountPaidDays() + " days premium]");
-		System.out.println("Action taken: " + users.get(idUser).getCountPossibleActions());
-		System.out.println("Level: " + users.get(idUser).getLevel() + "\nExp: " + users.get(idUser).getExp());
+		
+		outputUser(users.get(idUser));
+	}
+	
+	private void outputUser(UserModel user) {
+		System.out.print("Username - " + user.getName());
+		if (user.isPaid())
+			System.out.println("\t[Left " + user.getCountPaidDays() + " days premium]");
+		System.out.println("Action taken: " + user.getCountPossibleActions());
+		System.out.println("Level: " + user.getLevel() + "\nExp: " + user.getExp());
 	}
 
 	public UserModel createUser() {
