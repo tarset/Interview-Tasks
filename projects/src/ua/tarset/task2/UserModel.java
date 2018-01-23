@@ -55,5 +55,12 @@ public class UserModel {
 	public int getCountPaidDays() {
 		return countPaidDays;
 	}
+	public void emulatedNextDay() {
+		countPossibleActions = 0;
+		if(paid) 
+			countPaidDays--;
+		if (countPaidDays == 0)
+			paid = false;
+	}
 	
 }

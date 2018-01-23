@@ -28,29 +28,38 @@ public class UserController {
 	}
 	
 	public List<UserModel> emulatedDay(List<UserModel> users) {
+		System.out.println("===============================");
 		Random random = new Random();
 		for (UserModel user: users) {
-			int countAction = random.nextInt(6);
-			user.setCountPossibleActions(countAction);
+			int countAction = random.nextInt(5) + 1;
 			if (!user.isPaid() && countAction > 3)
 				countAction = 3;
+			user.setCountPossibleActions(countAction);
 			for (int i = 0; i < countAction; i++)
 				user.setExp(random.nextInt(100) + 20);
+			
+			//TODO: Тимчасово, потрібно придумати, щоб виводити кількість виконаних дій до емуляції нового дня.
+			System.out.print("Username - " + user.getName());
+			if (user.isPaid())
+				System.out.print("\t[Left " + user.getCountPaidDays() + " days premium]");
+			System.out.println("\nAction taken: " + user.getCountPossibleActions());
+			System.out.println("Level: " + user.getLevel() + "\nExp: " + user.getExp());
+			
+			user.emulatedNextDay();
 		}
+		System.out.println("===============================");
 		return users;
 	}
 
 	public void representUser(List<UserModel> users) {
-		for (int i = 0; i < users.size(); i++) {
+		for (int i = 0; i < users.size(); i++) 
 			System.out.println((i + 1) + ". " + users.get(i).getName());
-		}
 		System.out.print("Select user: ");
 		int idUser = Integer.parseInt(input()) - 1;
-		System.out.println("Username - " + users.get(idUser).getName());
+		System.out.print("Username - " + users.get(idUser).getName());
 		if (users.get(idUser).isPaid())
-			System.out.println("This is user a paid. Days left: " + users.get(idUser).getCountPaidDays() + ". Action taken: " + users.get(idUser).getCountPossibleActions());
-		else
-			System.out.println("This is user a free. Action taken: " + users.get(idUser).getCountPossibleActions());
+			System.out.println("\t[Left " + users.get(idUser).getCountPaidDays() + " days premium]");
+		System.out.println("Action taken: " + users.get(idUser).getCountPossibleActions());
 		System.out.println("Level: " + users.get(idUser).getLevel() + "\nExp: " + users.get(idUser).getExp());
 	}
 
@@ -73,7 +82,7 @@ public class UserController {
 	}
 
 	private String inputName() {
-		System.out.println("Enter a username: ");
+		System.out.print("Enter a username: ");
 		String name = input();
 		if (!name.equals("")) {
 			for (char c: name.toCharArray())
