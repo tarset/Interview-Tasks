@@ -26,8 +26,8 @@ for (char symbol: STR.toCharArray())
 numberOfLetters++; //increments count letters in target string
 ```
 ```java
-//if need - remodel characters in small
-String letter = symbol < 'a' ? String.valueOf((char) (symbol + 32)) : String.valueOf(symbol);
+//remodel character in small
+String letter = String.valueOf(symbol).toLowerCase();
 ```
 ```java
 //if such a letter is already included in the collection, then we increase its counter

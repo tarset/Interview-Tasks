@@ -20,8 +20,8 @@ public class Main {
 		for (char symbol: STR.toCharArray())
 			if (symbol >= 'A' && symbol <= 'Z' || symbol >= 'a' && symbol <= 'z') { //select only Latin letters
 				numberOfLetters++;
-				//if need - remodel characters in small
-				String letter = symbol < 'a' ? String.valueOf((char) (symbol + 32)) : String.valueOf(symbol); 
+				//remodel characters in small
+				String letter = String.valueOf(symbol).toLowerCase();
 				//if such a letter is already included in the collection, then we increase its counter
 				//otherwise creating model a letter and put it into a collection
 				if (letters.get(letter) != null) 
