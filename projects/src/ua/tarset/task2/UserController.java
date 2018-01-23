@@ -3,8 +3,8 @@ package ua.tarset.task2;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.Random;
 
 public class UserController {
 	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -21,20 +21,37 @@ public class UserController {
 		String s = "";
 		try {
 			s = reader.readLine();
-			//reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return s;
 	}
+	
+	public List<UserModel> emulatedDay(List<UserModel> users) {
+		Random random = new Random();
+		for (UserModel user: users) {
+			int countAction = random.nextInt(6);
+			user.setCountPossibleActions(countAction);
+			if (!user.isPaid() && countAction > 3)
+				countAction = 3;
+			for (int i = 0; i < countAction; i++)
+				user.setExp(random.nextInt(100) + 20);
+		}
+		return users;
+	}
 
-	public void representUser(UserModel user) {
-		System.out.println("Username - " + user.getName());
-		if (user.isPaid())
-			System.out.println("This is user a paid. Days left: " + user.getCountPaidDays());
+	public void representUser(List<UserModel> users) {
+		for (int i = 0; i < users.size(); i++) {
+			System.out.println((i + 1) + ". " + users.get(i).getName());
+		}
+		System.out.print("Select user: ");
+		int idUser = Integer.parseInt(input()) - 1;
+		System.out.println("Username - " + users.get(idUser).getName());
+		if (users.get(idUser).isPaid())
+			System.out.println("This is user a paid. Days left: " + users.get(idUser).getCountPaidDays() + ". Action taken: " + users.get(idUser).getCountPossibleActions());
 		else
-			System.out.println("This is user a free. Left action: " + user.getCountPossibleActions());
-		System.out.println("Level: " + user.getLevel() + "\nExp: " + user.getExp());
+			System.out.println("This is user a free. Action taken: " + users.get(idUser).getCountPossibleActions());
+		System.out.println("Level: " + users.get(idUser).getLevel() + "\nExp: " + users.get(idUser).getExp());
 	}
 
 	public UserModel createUser() {
