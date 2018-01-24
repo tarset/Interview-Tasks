@@ -1,12 +1,16 @@
 package ua.tarset.task2;
 
-public class UserModel {
+public class UserModel implements UserInterface {
 	private String name = "";
 	private int level = 0;
 	private int exp = 0;
 	private boolean paid = false;
 	private int countPossibleActions = 0;
 	private int countPaidDays = 0;
+	
+	public UserModel() {
+		new Alarm(this);
+	}
 	
 	public String getName() {
 		return name;
@@ -45,17 +49,28 @@ public class UserModel {
 	}
 	public void setCountPossibleActions(int countPossibleActions) {
 		if (paid)
-			this.countPossibleActions = countPossibleActions;
-		else if (countPossibleActions <= 3)
-			this.countPossibleActions = countPossibleActions;
-		else if (countPossibleActions > 3)
+			this.countPossibleActions += countPossibleActions;
+		else if (this.countPossibleActions + countPossibleActions <= 3)
+			this.countPossibleActions += countPossibleActions;
+		else if (this.countPossibleActions + countPossibleActions > 3)
 			this.countPossibleActions = 3;
 	}
 	
 	public int getCountPaidDays() {
 		return countPaidDays;
 	}
-	public void emulatedNextDay() {
+	
+	public void outputUser() {
+		System.out.println("==========");
+		System.out.print("Username - " + name);
+		if (paid)
+			System.out.print("\t[Left " + countPaidDays + " days premium]");
+		System.out.println("\nAction taken: " + countPossibleActions);
+		System.out.println("Level: " + level + "\nExp: " + exp);
+		System.out.println("==========");
+	}
+	
+	public void nextDay() {
 		countPossibleActions = 0;
 		if(paid) 
 			countPaidDays--;

@@ -27,19 +27,16 @@ public class UserController {
 		return s;
 	}
 	
-	public List<UserModel> emulatedDay(List<UserModel> users) {
+	public List<UserModel> emulatedAction(List<UserModel> users) {
 		Random random = new Random();
 		for (UserModel user: users) {
 			int countAction = random.nextInt(5) + 1;
-			if (!user.isPaid() && countAction > 3)
-				countAction = 3;
-			user.setCountPossibleActions(countAction);
-			for (int i = 0; i < countAction; i++)
-				user.setExp(random.nextInt(100) + 20);
-			
-			outputUser(user);
-			
-			user.emulatedNextDay();
+			for (int i = 1; i <= countAction; i++) {
+				if (user.isPaid() || countAction <= 3) {
+					user.setCountPossibleActions(1);
+					user.setExp(random.nextInt(100) + 20);
+				}
+			}
 		}
 		return users;
 	}
@@ -50,18 +47,10 @@ public class UserController {
 		System.out.print("Select user: ");
 		int idUser = Integer.parseInt(input()) - 1;
 		
-		outputUser(users.get(idUser));
+		users.get(idUser).outputUser();
 	}
 	
-	private void outputUser(UserModel user) {
-		System.out.println("==========");
-		System.out.print("Username - " + user.getName());
-		if (user.isPaid())
-			System.out.print("\t[Left " + user.getCountPaidDays() + " days premium]");
-		System.out.println("\nAction taken: " + user.getCountPossibleActions());
-		System.out.println("Level: " + user.getLevel() + "\nExp: " + user.getExp());
-		System.out.println("==========");
-	}
+	
 
 	public UserModel createUser() {
 		UserModel user = new UserModel();
