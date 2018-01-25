@@ -154,7 +154,7 @@ public UserModel createUser() {
 private String inputName() {
 		System.out.print("Enter a username: ");
 		String name = input();
-		if (!name.equals("")) { //if name on empty
+		if (!name.equals("")) { //if name not empty
 			for (char c: name.toCharArray())
 			//could can only consist of characters "[a-z][A-Z][0-9]-._"
 				if (!(c >= 'A' && c <= 'Z' 

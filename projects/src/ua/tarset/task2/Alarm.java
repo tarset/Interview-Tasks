@@ -10,7 +10,7 @@ public class Alarm {
     UserView user;
 
     public Alarm(UserView user) {
-    	this.user = user;
+    	this.user = user; //for use only method "nextDay()" from "UserModel"
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -20,7 +20,7 @@ public class Alarm {
         Date alarmTime = calendar.getTime();
 
         _timer = new Timer();
-        _timer.schedule(new AlarmTask(), alarmTime);
+        _timer.schedule(new AlarmTask(), alarmTime); //the beginning of a new thread, which is executed every time at midnight
     }
 
     class AlarmTask extends TimerTask {

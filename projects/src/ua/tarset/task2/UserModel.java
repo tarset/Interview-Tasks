@@ -9,7 +9,7 @@ public class UserModel implements UserView {
 	private int countPaidDays = 0;
 	
 	public UserModel() {
-		new Alarm(this);
+		new Alarm(this); //create object with another tread with call method "nextDay()" will be run every day at midnight
 	}
 	
 	public String getName() {
