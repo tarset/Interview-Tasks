@@ -47,13 +47,11 @@ public class UserModel implements UserView {
 	public int getCountPossibleActions() {
 		return countPossibleActions;
 	}
-	public void setCountPossibleActions(int countPossibleActions) {
+	public void increaseCounterAction() {
 		if (paid)
-			this.countPossibleActions += countPossibleActions;
-		else if (this.countPossibleActions + countPossibleActions <= 3)
-			this.countPossibleActions += countPossibleActions;
-		else if (this.countPossibleActions + countPossibleActions > 3)
-			this.countPossibleActions = 3;
+			this.countPossibleActions++;
+		else if (this.countPossibleActions < 3)
+			this.countPossibleActions++;
 	}
 	
 	public int getCountPaidDays() {
@@ -61,13 +59,11 @@ public class UserModel implements UserView {
 	}
 	
 	public void outputUser() {
-		System.out.println("==========");
-		System.out.print("Username - " + name);
+		System.out.print("#Username - " + name);
 		if (paid)
 			System.out.print("\t[Left " + countPaidDays + " days premium]");
-		System.out.println("\nAction taken: " + countPossibleActions);
-		System.out.println("Level: " + level + "\nExp: " + exp);
-		System.out.println("==========");
+		System.out.println("\n$Action taken: " + countPossibleActions);
+		System.out.println("&Level: " + level + "\nExp: " + exp);
 	}
 	
 	public void nextDay() {

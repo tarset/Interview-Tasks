@@ -37,7 +37,7 @@ public class UserController {
 			int countAction = random.nextInt(5) + 1;
 			for (int i = 1; i <= countAction; i++) {
 				if (user.isPaid() || countAction <= 3) {
-					user.setCountPossibleActions(1);
+					user.increaseCounterAction();
 					user.setExp(random.nextInt(100) + 20);
 				}
 			}
