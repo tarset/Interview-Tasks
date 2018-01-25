@@ -7,9 +7,9 @@ import java.util.TimerTask;
 
 public class Alarm {
     Timer _timer;
-    UserInterface user;
+    UserView user;
 
-    public Alarm(UserInterface user) {
+    public Alarm(UserView user) {
     	this.user = user;
 
         Calendar calendar = Calendar.getInstance();

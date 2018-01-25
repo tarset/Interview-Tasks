@@ -7,7 +7,11 @@ import java.util.List;
 import java.util.Random;
 
 public class UserController {
-	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	private BufferedReader reader;
+	
+	public UserController() {
+		reader = new BufferedReader(new InputStreamReader(System.in));
+	}
 	
 	public void close() {
 		try {

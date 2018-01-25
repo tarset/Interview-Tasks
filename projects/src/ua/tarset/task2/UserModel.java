@@ -1,6 +1,6 @@
 package ua.tarset.task2;
 
-public class UserModel implements UserInterface {
+public class UserModel implements UserView {
 	private String name = "";
 	private int level = 0;
 	private int exp = 0;

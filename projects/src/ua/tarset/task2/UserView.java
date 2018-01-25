@@ -1,6 +1,6 @@
 package ua.tarset.task2;
 
-public interface UserInterface {
+public interface UserView {
 
 	void nextDay();
 	
